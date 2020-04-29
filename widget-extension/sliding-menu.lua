@@ -53,6 +53,7 @@ function M.new(options)
 		sFormat("options.listItems (table) expected, got %s", type(options.listItems))
 	)
 
+	local y = options.y or 0
 	local screenWidthFifth = (dWidth / 5)
 	local side = options.side or "left"
 	local width = options.width or (dWidth - screenWidthFifth)
@@ -395,18 +396,17 @@ function M.new(options)
 				labelText.y = (rowContentHeight * 0.5) + labelParams.heightPadding
 				row:insert(labelText)
 
-				row:addEventListener("touch", touch)
-			end,
-			onRowTouch = function(event)
-				local phase = event.phase
-				local row = event.row
-				local params = row.params
+				row:addEventListener(
+					"tap",
+					function(event)
+						if (type(params.onPress) == "function") then
+							params.onPress(event)
+						end
 
-				if (not group.isTransitioning and phase == "press") then
-					if (type(params.onPress) == "function") then
-						params.onPress(event)
+						return true
 					end
-				end
+				)
+				row:addEventListener("touch", touch)
 			end
 		}
 	)
@@ -463,7 +463,7 @@ function M.new(options)
 	group.anchorX = 0.5
 	group.anchorY = 0.5
 	group.x = -(width / 2)
-	group.y = (height / 2)
+	group.y = (height / 2) + y
 
 	return group
 end
