@@ -1,0 +1,3 @@
+[submodule "transition-extension"]
+	path = transition-extension
+	url = git@github.com:DannyGlover/Solar2D-TransitionExtension.git
