@@ -61,6 +61,12 @@ function M.new(options)
 		heightPadding = options.titleText.heightPadding or 0
 	}
 
+	-- group methods
+
+	function group:updateTitle(text)
+		titleText.text = text
+	end
+
 	local function createButtonOptions(params, index, side)
 		local defaultOptions = {
 			x = params and params.x or 0,
