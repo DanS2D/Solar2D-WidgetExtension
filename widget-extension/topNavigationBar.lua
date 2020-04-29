@@ -99,7 +99,7 @@ function M.new(options)
 			}
 		)
 		button.x = opt.x + xOffset
-		button.y = (topBar.contentHeight * 0.5)
+		button.y = topBar.y
 		button.useTouchEffect = opt.useTouchEffect
 		button.onPress = opt.onPress
 		button.onRelease = opt.onRelease
